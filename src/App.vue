@@ -25,5 +25,6 @@
 <style lang="scss" scoped>
 .app {
   min-height: 100vh;
+  border: 1px solid rgba(0,0,0,0);
 }
 </style>

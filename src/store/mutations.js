@@ -16,6 +16,12 @@ const mutations = {
     [types.SET_TOKEN](state, token) {
         localStorage.token = token;
         state.token = token;
+    },
+    [types.SET_CATEGORY](state, category) {
+        state.category = category;
+    },
+    [types.SET_CURRENTAUDIO](state, currentAudio) {
+        state.currentAudio = currentAudio;
     }
 }
 export default mutations

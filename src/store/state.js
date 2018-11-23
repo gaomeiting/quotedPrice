@@ -1,6 +1,8 @@
 const state= {
 	user: null,
 	status: -1,
-	token: null
+	token: null,
+	category: {},
+	currentAudio: {}
 }
 export default state;

@@ -1,4 +1,5 @@
 import wx from 'weixin-js-sdk'
+import {getDataHide} from 'api/api';
 export const wxShare = {
 	methods: {
 		hasIos() {
@@ -145,7 +146,8 @@ export const audioHandler = {
 			totalTime: '',
 			songReady: false,
 			song: false,
-			diff: 0
+			diff: 0,
+			percent: 0
 		}
 	},
 	methods: {
@@ -172,9 +174,10 @@ export const audioHandler = {
 		updateTime(e) {
 			let currentTime = e.target.currentTime | 0;
 			let totalTime = this.$refs.audio && this.$refs.audio.duration | 0;
-			let diff = totalTime * 1 - currentTime * 1
+			let diff = currentTime * 1
 			this.diff = diff;
 			this.currentTime = this.format(diff);
+			this.percent= currentTime / totalTime ;
 		},
 		end() {
 			this.flag = false;
@@ -187,6 +190,86 @@ export const audioHandler = {
 			s = n % 60;
 			let padS = this._pad(s)
 			return `${m}:${padS}`
+		},
+		_pad(num, n = 2) {
+			let len = num.toString().length
+			while (len < n) {
+				num = '0' + num
+				len++
+			}
+			return num
+		}
+	}
+};
+export const audioHandlerProgress = {
+	data() {
+		return {
+			currentSongIndex: -1,
+			flag: false,
+			currentTime: '',
+			totalTime: '',
+			songReady: false,
+			song: false,
+			diff: 0,
+			percent: 0
+		}
+	},
+	methods: {
+		setSongProgress(percent, flag) {
+			if(this.currentSongIndex<0) this.currentSongIndex = 0;
+			if(percent==1){
+				this.end();
+				return;
+			}
+			if(this.$refs.audio.currentTime==percent * this.list[this.currentSongIndex].duration){
+				return;
+			}
+			this.$refs.audio.currentTime=percent*this.list[this.currentSongIndex].duration
+			
+		},
+		settingCurrentSong(index) {
+			if (index === this.currentSongIndex) {
+				//歌曲切换
+				this.flag = !this.flag;
+				this.flag ? this.$refs.audio.play() : this.$refs.audio.pause()
+			} else {
+				this.song = true;
+				this.currentSongIndex = index
+				this.$refs.audio.load()
+				setTimeout(() => {
+					this.song = false
+					this.$refs.audio.play();
+				}, 1000)
+				this.flag = true;
+
+			}
+		},
+		ready() {
+			this.songReady = true;
+		},
+		updateTime(e) {
+			let currentTime = e.target.currentTime | 0;
+			let totalTime = this.$refs.audio && this.$refs.audio.duration | 0;
+			let diff = currentTime * 1
+			this.diff = diff;
+			this.currentTime = this.format(diff);
+			this.percent= currentTime / totalTime ;
+		},
+		end() {
+			this.flag = false;
+			this._loop()
+		},
+		format(n) {
+			if(!n) return '';
+			let m = 0;
+			let s = 0;
+			m = n / 60 | 0;
+			s = n % 60;
+			let padS = this._pad(s)
+			return `${m}:${padS}`
+		},
+		_loop() {
+			this.$refs.audio.currentTime=0
 		},
 		_pad(num, n = 2) {
 			let len = num.toString().length

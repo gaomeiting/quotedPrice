@@ -1,0 +1,77 @@
+<template>
+<div class="current">
+	<div class="category-wrap" v-if="category.category">
+		<div class="switches-wrap">
+			<switches :switches="switches" @switchItem="switchItem" :currentIndex="currentCategoryIndex"></switches>
+		</div>
+		<transition name="fadePage" mode="out-in">
+			<category :level="category.category[currentCategoryIndex]" :name="category.name" :type="category.type"></category>
+		</transition>
+	</div>
+	<div class="details">
+		<h3>报价详细说明</h3>
+		<p class="content" v-html="category.category[currentCategoryIndex]['details']"></p>
+	</div>
+</div>
+</template>
+<script type="text/ecmascript-6">
+import Category from 'components/category/category';
+import Switches from 'components/switches/switches';
+import { mapGetters } from 'vuex';
+export default {
+	data() {
+		return {
+			currentCategoryIndex: 0,
+			switches: []
+		}
+	},
+	created () {
+		if(!this.category.name) {
+			this.$router.back();
+			return;
+		}
+		let category = this.category.category;
+		for( let i= 0; i<category.length; i++) {
+			let name = `${category[i]['type']}类`
+			this.switches[i]= { name }
+		}
+	},
+	
+	computed: {
+		...mapGetters(['category'])	
+	},
+	methods: {
+		switchItem(index) {
+			this.currentCategoryIndex = index;
+		}
+	},
+	components: {
+		Category,
+		Switches	
+	}
+}
+</script>
+
+<style scoped lang="scss">
+@import "~assets/scss/variable";
+@import "~assets/scss/mixin";
+.category-wrap {
+	padding: 16px;
+	border-bottom: 8px solid $color-background;
+	.switches-wrap {
+		margin-bottom: 28px;
+	}
+}
+.details {
+	padding: 16px;
+	h3 {
+		line-height: 40px;
+		font-size: $font-size-medium-x;
+		font-weight: bold;
+		color: $color-text-l;
+	}
+	> p {
+		line-height: 1.5;
+	}
+}
+</style>

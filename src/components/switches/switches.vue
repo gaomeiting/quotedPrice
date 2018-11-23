@@ -31,18 +31,21 @@ export default {
 <style scoped lang="scss" rel="stylesheet/scss">
 @import "~assets/scss/variable";
 .switches {
-	 
-	display: inline-block;
-	cursor: pointer;
+	display: flex;
+	align-items: center;
+	width: 240px;
+	margin: 0 auto;
+	border: 1px solid $color-theme;
+	border-radius: 5px;
 	.switch-item {
-		display: inline-block;
-		padding: 6px 0 10px;
+		flex: 1;
+		padding: 8px;
+		text-align: center;
 		font-size: $font-size-medium;
-		margin: 0 20px -2px;
-		/* color: $color-theme; */
+		color: $color-theme;
 		&.active {
-			color: $color-sub-theme;
-			border-bottom: 3px solid $color-sub-theme;
+			background: $color-theme;
+			color: $color-background-d;
 		}
 	}
 }

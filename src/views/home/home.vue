@@ -1,25 +1,41 @@
 <template>
-<div class="current">
+<div class="current" v-if="list">
 	<div class="top-wrap">
 		<div class="poster-wrap placeholder">
 			<img src="http://e.hiphotos.baidu.com/image/h%3D300/sign=cc25cc7498cad1c8cfbbfa274f3f67c4/83025aafa40f4bfb0786420f0e4f78f0f7361813.jpg" alt="">
 		</div>
 	</div>
-	<panel title="导读">
+	<panel v-for="(item, index) in list" :key="index" :title="item.name" :item="item" @goDetail="goDetail">
 		<div class="category-wrap">
-			<category></category>
+			<category-list :item="item"></category-list>
 		</div>
 	</panel>
 </div>
 </template>
 <script type="text/ecmascript-6">
 import Panel from 'components/panel/panel';
-import Category from 'components/category/category';
+import CategoryList from 'components/category-list/category-list';
+import { data } from 'api/data';
 import { handlerError } from 'assets/js/mixins'
+import { mapMutations } from 'vuex';
 export default {
+	data() {
+		return {
+			list: data
+		}
+	},
+	methods: {
+		goDetail(item) {
+			this.setCategory(item)
+			this.$router.push(`/index/${item.type}`)
+		},
+		...mapMutations({
+			'setCategory': 'SET_CATEGORY'
+		})	
+	},
 	components: {
 		Panel,
-		Category
+		CategoryList
 	}
 }
 </script>

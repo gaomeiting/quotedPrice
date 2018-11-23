@@ -9,6 +9,12 @@ const routes = [{
 },{
   path: "/index",
   component: () => import ('views/home/home')
+},{
+  path: "/index/:type",
+  component: () => import ('views/project/project')
+},{
+  path: "/index/:type/:level/:audioId",
+  component: () => import ('views/audio-details/audio-details')
 }];
 
 // add route path

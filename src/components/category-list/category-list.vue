@@ -1,57 +1,25 @@
 <template>
 <div>
-  <div class="category">
-	  <div class="info">
-		  <div class="icon">
-			  <p>
-				  {{level.type}}类<br>
-				  {{name}}
-			  </p>
-		  </div>
-		  <div class="text">
-			  <h3>{{level.type}}类{{name}}</h3>
-			  <p v-html="level.summary"></p>
-			  <p> <small>￥</small>  <strong>{{level.price}}</strong> <small>{{level.unit}}</small> <small>￥{{level.originalPrice}}</small></p>
-		  </div>
-	  </div>
-  </div>
-  <audio-list :list="level.audioList" @goAudioDetails="goAudioDetails" :type="name" :level="level.type"></audio-list>
+	<div class="category" v-for="(level, index) in item.category" :key="index">
+		<category :level="level" :name="item.name" :type="item.type"></category>
+		
+	</div>
 </div>
 </template>
 
 <script type="text/ecmascript-6">
-import AudioList from 'components/audio-list/audio-list';
-import { mapMutations } from 'vuex';
+import Category from 'components/category/category';
 export default {
 	props: {
-		level: {
+		item: {
 			type: Object,
 			default() {
 				return {}
 			}
-		},
-		name: {
-			type: String,
-			default: ''
-		},
-		type: {
-			type: String,
-			default: ''
 		}
 	},
-	methods: {
-		goAudioDetails(index) {
-			let currentAudio = {...this.level.audioList[index], name: this.type, type: this.level.type}
-			this.setCurrentAudio(currentAudio);
-			let path= `/index/${currentAudio.name}/${currentAudio.type}/${currentAudio.id}`;
-			this.$router.push(path)
-		},
-		...mapMutations({
-			'setCurrentAudio': 'SET_CURRENTAUDIO'
-		})	
-	},
 	components: {
-		AudioList
+		Category
 	}
 }
 </script>

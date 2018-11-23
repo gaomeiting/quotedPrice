@@ -1,6 +1,6 @@
 <template>
   <div class="panel">
-	  	<h2>
+	  	<h2 @click.stop="goDetail(item)">
 			<strong>
 				{{title}} 
 			</strong>
@@ -16,10 +16,18 @@ export default {
 		title: {
 			type: String,
 			default: ''
+		},
+		item: {
+			type: Object,
+			default() {
+				return {}
+			}
 		}
 	},
 	methods: {
-		
+		goDetail(currentIndex) {
+			this.$emit('goDetail', currentIndex);
+		}
 	}
 }
 </script>

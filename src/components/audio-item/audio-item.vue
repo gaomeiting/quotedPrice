@@ -2,16 +2,24 @@
 <ul>
 	<li v-for="(item, index) in list" :key="index" @click.stop="goAudioDetails(index)">
 		<div class="content">
-			<figure>
-				<img :src="item.cover">
-			</figure>
+			<div class="cover" :style="'background-image: url('+item.cover+')'">
+				<div class="mask">
+					<div class="icon" @click.stop="settingCurrentSong(index)" :class="song && index === currentSongIndex && flag ? 'icon_loading' : ''" >
+						<i class="iconfont"  v-if="(index != currentSongIndex) || (index === currentSongIndex && !song) " :class="index === currentSongIndex && flag ? 'icon-pause' : 'icon-bofang'"></i>
+					</div>
+				</div>
+			</div>
 			<div class="text">
 				<h3>{{item.info}}</h3>
 				<p>{{type}}-{{level}}类</p>
 			</div>
-		</div>
-		<div class="icon" @click.stop="settingCurrentSong(index)" :class="song && index === currentSongIndex && flag ? 'icon_loading' : ''" >
-			<i class="iconfont"  v-if="(index != currentSongIndex) || (index === currentSongIndex && !song) " :class="index === currentSongIndex && flag ? 'icon-pause' : 'icon-bofang'"></i>
+			<div class="progress-wrap">
+				<span>{{ index != currentSongIndex || !diff || (song && index === currentSongIndex && flag) ? '0:00' : currentTime }}</span>
+				<div class="progress-content">
+					<progress-bar :percent="percent" @triggerPercent="setSongProgress"></progress-bar>
+				</div>
+				<span>{{format(item.duration)}}</span>
+			</div>
 		</div>
 	</li>
 	<audio :src="list[currentSongIndex] && list[currentSongIndex].url" ref="audio" @timeupdate="updateTime" @play="ready" @ended="end"></audio>
@@ -19,9 +27,10 @@
 </template>
 
 <script type="text/ecmascript-6">
-import { audioHandler } from 'assets/js/mixins'
+import ProgressBar from 'components/progress-bar/progress-bar';
+import { audioHandlerProgress } from 'assets/js/mixins'
 export default {
-	mixins: [ audioHandler ],
+	mixins: [ audioHandlerProgress ],
 	props: {
 		list: {
 			type: Array,
@@ -42,6 +51,9 @@ export default {
 		goAudioDetails(index) {
 			this.$emit('goAudioDetails', index)
 		}
+	},
+	components: {
+		ProgressBar
 	}
 }
 </script>
@@ -49,31 +61,49 @@ export default {
 <style scoped lang="scss" rel="stylesheet/scss">
 @import "~assets/scss/variable";
 @import "~assets/scss/mixin";
+.progress-wrap {
+	display: flex;
+	align-items: center;
+	.progress-content {
+		flex: 1;
+		margin: 0 8px;
+	}
+}
 li {
 	display: flex;
 	align-items: center;
 	padding: 12px;
-	border-radius: 6px;
-	box-shadow: 1px 1px 6px rgba(0,0,0,0.1), -1px -1px 6px rgba(0,0,0,0.1);
 	margin: 16px 0;
 	.content {
 		flex: 1;
 		display: flex;
+		flex-direction: column;
 		align-items: center;
-		figure {
+		.progress-wrap {
+			width: 100%;
+		}
+		.cover {
 			flex: 0 0 78px;
 			width: 78px;
 			height: 78px;
 			overflow: hidden;
 			border-radius: 6px;
-			img {
+			background-size: cover;
+			background-position: top center;
+			background-repeat: no-repeat;
+			box-shadow: 1px 1px 6px rgba(0,0,0,0.1), -1px -1px 6px rgba(0,0,0,0.1);
+			.mask {
 				width: 100%;
-				min-height: 100%;
+				height: 100%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background: rgba(0,0,0,0.7);
 			}
 		}
 		.text {
 			flex: 1;
-			padding-left: 12px;
+			text-align: center;
 			h3 {
 				color: $color-text-l;
 				line-height: 1.5;
@@ -94,6 +124,7 @@ li {
 		i {
 			font-size: 40px;
 			color: $color-text-l;
+			color: $color-background-d;
 		}
 	}
 }
