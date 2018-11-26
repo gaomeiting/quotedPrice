@@ -2,7 +2,7 @@
 <div>
   <div class="category">
 	  <div class="info">
-		  <div class="icon">
+		  <div class="icon" :style="'background-image: url(/common/images/'+level.type+'_bg.png)'">
 			  <p>
 				  {{level.type}}类<br>
 				  {{name}}
@@ -15,7 +15,7 @@
 		  </div>
 	  </div>
   </div>
-  <audio-list :list="level.audioList" @goAudioDetails="goAudioDetails" :type="name" :level="level.type"></audio-list>
+  <audio-list :list="level.audioList" @goAudioDetails="goAudioDetails" :type="name" :level="level.type" :hideAudio="hideAudio"></audio-list>
 </div>
 </template>
 
@@ -37,6 +37,10 @@ export default {
 		type: {
 			type: String,
 			default: ''
+		},
+		hideAudio: {
+			type: Boolean,
+			default: false
 		}
 	},
 	methods: {
@@ -68,7 +72,6 @@ export default {
 			height: 116px;
 			overflow: hidden;
 			border-radius: 6px;
-			background-image: url('/common/images/a_bg.png');
 			background-size: cover;
 			background-position: center top;
 			background-repeat: no-repeat;

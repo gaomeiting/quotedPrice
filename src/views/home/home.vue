@@ -2,12 +2,12 @@
 <div class="current" v-if="list">
 	<div class="top-wrap">
 		<div class="poster-wrap placeholder">
-			<img src="http://e.hiphotos.baidu.com/image/h%3D300/sign=cc25cc7498cad1c8cfbbfa274f3f67c4/83025aafa40f4bfb0786420f0e4f78f0f7361813.jpg" alt="">
+			<img src="/common/images/bg.png" alt="">
 		</div>
 	</div>
 	<panel v-for="(item, index) in list" :key="index" :title="item.name" :item="item" @goDetail="goDetail">
 		<div class="category-wrap">
-			<category-list :item="item"></category-list>
+			<category-list :item="item" :hideAudio="true"></category-list>
 		</div>
 	</panel>
 </div>
@@ -49,7 +49,7 @@ export default {
 }
 .poster-wrap {
 	border-radius: 6px;
-	@include autoHeight(100%, 38%);
+	@include autoHeight(100%, 37.6%);
 }
 .category-wrap {
 	padding: 0 16px;

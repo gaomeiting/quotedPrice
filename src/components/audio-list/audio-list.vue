@@ -10,7 +10,7 @@
 				<p>{{type}}-{{level}}类</p>
 			</div>
 		</div>
-		<div class="icon" @click.stop="settingCurrentSong(index)" :class="song && index === currentSongIndex && flag ? 'icon_loading' : ''" >
+		<div v-if="!hideAudio" class="icon" @click.stop="settingCurrentSong(index)" :class="song && index === currentSongIndex && flag ? 'icon_loading' : ''" >
 			<i class="iconfont"  v-if="(index != currentSongIndex) || (index === currentSongIndex && !song) " :class="index === currentSongIndex && flag ? 'icon-pause' : 'icon-bofang'"></i>
 		</div>
 	</li>
@@ -36,6 +36,10 @@ export default {
 		level: {
 			type: String,
 			default: ''
+		},
+		hideAudio: {
+			type: Boolean,
+			default: false
 		}
 	},
 	methods: {

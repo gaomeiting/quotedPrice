@@ -1,8 +1,7 @@
 <template>
 <div>
 	<div class="category" v-for="(level, index) in item.category" :key="index">
-		<category :level="level" :name="item.name" :type="item.type"></category>
-		
+		<category :level="level" :name="item.name" :type="item.type" :hideAudio="hideAudio"></category>
 	</div>
 </div>
 </template>
@@ -16,8 +15,13 @@ export default {
 			default() {
 				return {}
 			}
+		},
+		hideAudio: {
+			type: Boolean,
+			default: false
 		}
 	},
+	
 	components: {
 		Category
 	}

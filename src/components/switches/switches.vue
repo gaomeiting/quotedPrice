@@ -31,20 +31,22 @@ export default {
 <style scoped lang="scss" rel="stylesheet/scss">
 @import "~assets/scss/variable";
 .switches {
-	display: flex;
-	align-items: center;
-	width: 240px;
+	display: inline-block;
+	text-align: center;
 	margin: 0 auto;
-	border: 1px solid $color-theme;
-	border-radius: 5px;
+	/* border: 1px solid $color-text-l; */
+	border-radius: 16px;
+	background-color: $color-background;
 	.switch-item {
-		flex: 1;
+		display: inline-block;
+		width: 76px;
 		padding: 8px;
 		text-align: center;
 		font-size: $font-size-medium;
-		color: $color-theme;
+		color: $color-text-d;
+		border-radius: 16px;
 		&.active {
-			background: $color-theme;
+			background: $color-text-l;
 			color: $color-background-d;
 		}
 	}

@@ -31,7 +31,7 @@ export const data = [
                     {
                         id: '01',
                         cover: '/common/images/300.jpg',
-                        url: '/common/audio/abc.mp3',
+                        url: '/common/audio/cmd.mp3',
                         info: '就像是看了场足够感动的电影，最后还是要一个人过自己的生活。精选22首综艺伤感情歌，陪你熬过伤心，愿你遇见更好的人。',
                         duration: '30'
                     }

@@ -150,6 +150,7 @@ export const audioHandler = {
 			percent: 0
 		}
 	},
+	
 	methods: {
 		settingCurrentSong(index) {
 			if (index === this.currentSongIndex) {
@@ -214,6 +215,7 @@ export const audioHandlerProgress = {
 			percent: 0
 		}
 	},
+	
 	methods: {
 		setSongProgress(percent, flag) {
 			if(this.currentSongIndex<0) this.currentSongIndex = 0;

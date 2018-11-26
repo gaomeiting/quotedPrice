@@ -87,7 +87,7 @@ methods: {
 		.progress {
 			position: absolute;
 			height: 100%;
-			background: $color-theme;
+			background: $color-text-l;
 		}
 		.progress-btn-wrapper {
 			position: absolute;
@@ -102,9 +102,9 @@ methods: {
 				box-sizing: border-box;
 				width: 16px;
 				height: 16px;
-				border: 3px solid $color-theme;
+				border: 3px solid $color-text-d;
 				border-radius: 50%;
-				background: $color-sub-theme;
+				background: $color-text-l;
 			}
 		}
 	}

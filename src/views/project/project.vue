@@ -1,22 +1,26 @@
 <template>
 <div class="current">
-	<div class="category-wrap" v-if="category.category">
+	<div class="category-wrap" v-if="category.category.length > 0">
 		<div class="switches-wrap">
 			<switches :switches="switches" @switchItem="switchItem" :currentIndex="currentCategoryIndex"></switches>
 		</div>
 		<transition name="fadePage" mode="out-in">
-			<category :level="category.category[currentCategoryIndex]" :name="category.name" :type="category.type"></category>
+			<category v-for="(item, index) in category.category" :key="index" v-if="currentCategoryIndex === index" :level="category.category[currentCategoryIndex]" :name="category.name" :type="category.type"></category>
 		</transition>
 	</div>
 	<div class="details">
 		<h3>报价详细说明</h3>
 		<p class="content" v-html="category.category[currentCategoryIndex]['details']"></p>
 	</div>
+	<div class="footer-btns-wrap">
+		<footer-btns></footer-btns>
+	</div>
 </div>
 </template>
 <script type="text/ecmascript-6">
 import Category from 'components/category/category';
 import Switches from 'components/switches/switches';
+import FooterBtns from 'components/footer-btns/footer-btns';
 import { mapGetters } from 'vuex';
 export default {
 	data() {
@@ -47,7 +51,8 @@ export default {
 	},
 	components: {
 		Category,
-		Switches	
+		Switches,
+		FooterBtns	
 	}
 }
 </script>
@@ -55,10 +60,14 @@ export default {
 <style scoped lang="scss">
 @import "~assets/scss/variable";
 @import "~assets/scss/mixin";
+.current {
+	padding-bottom: 56px;
+}
 .category-wrap {
 	padding: 16px;
 	border-bottom: 8px solid $color-background;
 	.switches-wrap {
+		text-align: center;
 		margin-bottom: 28px;
 	}
 }
@@ -73,5 +82,11 @@ export default {
 	> p {
 		line-height: 1.5;
 	}
+}
+.footer-btns-wrap {
+	position: fixed;
+	bottom: 20px;
+	left: 50%;
+	transform: translate3d(-50%, 0, 0);
 }
 </style>

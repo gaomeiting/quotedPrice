@@ -34,6 +34,14 @@ export default {
 
 <style scoped lang="scss" rel="stylesheet/scss">
 @import "~assets/scss/variable";
+@import "~assets/scss/mixin";
+.panel {
+	padding-bottom: 16px;
+	@include border-1px($color-background)
+	&:last-of-type {
+		@include border-1px($color-background-d)
+	}
+}
 h2 {
 	height: 56px;
 	line-height: 56px;
