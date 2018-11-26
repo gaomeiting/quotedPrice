@@ -8,12 +8,18 @@ const routes = [{
   redirect: '/index'
 },{
   path: "/index",
+  meta: {
+    title: '有声产品报价单'
+  },
   component: () => import ('views/home/home')
 },{
   path: "/index/:type",
   component: () => import ('views/project/project')
 },{
   path: "/index/:type/:level/:audioId",
+  meta: {
+    title: '样音详情'
+  },
   component: () => import ('views/audio-details/audio-details')
 }];
 
