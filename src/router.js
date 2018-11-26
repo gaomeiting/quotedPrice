@@ -29,6 +29,7 @@ routes.forEach(route => {
 });
 
 const router = new Router({
+  mode: 'history',
   routes,
   scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
