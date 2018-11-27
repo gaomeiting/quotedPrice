@@ -21,19 +21,24 @@
 import Category from 'components/category/category';
 import Switches from 'components/switches/switches';
 import FooterBtns from 'components/footer-btns/footer-btns';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations } from 'vuex';
+import { data } from 'api/data';
+import { Dialog } from 'vant';
 export default {
 	data() {
 		return {
 			currentCategoryIndex: 0,
-			switches: []
+			switches: [],
+			data
 		}
 	},
 	created () {
-		if(!this.category.name) {
+		/* if(!this.category.name) {
 			this.$router.back();
 			return;
-		}
+		} */
+		let name =  this.$route.params.type;
+		this.savedCategory(name)
 		let category = this.category.category;
 		for( let i= 0; i<category.length; i++) {
 			let name = `${category[i]['type']}类`
@@ -45,9 +50,26 @@ export default {
 		...mapGetters(['category'])	
 	},
 	methods: {
+		savedCategory(name) {
+			let category = this.data.find(item => {
+				return item.type === name;
+			})
+			if(!category) {
+				//没有当前分类；
+				Dialog.alert({
+					message: '没有当前分类'
+				}).then(() => {
+					this.$router.push('/')
+				})
+			}
+			this.setCategory(category)
+		},
 		switchItem(index) {
 			this.currentCategoryIndex = index;
-		}
+		},
+		...mapMutations({
+			'setCategory': 'SET_CATEGORY'
+		})
 	},
 	components: {
 		Category,
