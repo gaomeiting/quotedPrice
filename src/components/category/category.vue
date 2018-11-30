@@ -11,7 +11,8 @@
 		  <div class="text">
 			  <h3>{{level.type}}类{{name}}</h3>
 			  <p v-html="level.summary"></p>
-			  <p> <small>￥</small>  <strong>{{level.price}}</strong> <small>{{level.unit}}</small> <small>￥{{level.originalPrice}}</small></p>
+			 <p class="price-wrap"> <small>￥</small>  <strong>{{level.price}}</strong> <small>{{level.unit}}</small> <small class="inlineBlock" v-if="!level.originalUnit">￥{{level.originalPrice}}</small></p>
+			<p class="price-wrap" v-if="level.originalUnit"> <small>￥</small>  <strong>{{level.originalPrice}}</strong><small>{{level.originalUnit}}</small></p>
 		  </div>
 	  </div>
   </div>
@@ -100,9 +101,10 @@ export default {
 					line-height: 1.5;
 					@include ellipsis(3);
 				}
-				&:last-of-type {
+				&.price-wrap {
 					display: flex;
 					align-items: baseline;
+					line-height: 1.2;
 					strong {
 						font-size: $font-size-large;
 						color: red;
@@ -113,7 +115,7 @@ export default {
 						&:first-of-type {
 							color: red;
 						}
-						&:last-of-type {
+						&.inlineBlock {
 							text-decoration: line-through;
 							flex: 1;
 							text-align: right;

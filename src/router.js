@@ -31,13 +31,13 @@ routes.forEach(route => {
 const router = new Router({
   /* mode: 'history', */
   routes,
-  /* scrollBehavior (to, from, savedPosition) {
+  scrollBehavior (to, from, savedPosition) {
     if (savedPosition) {
      return savedPosition
     } else {
      return { x: 0, y: 0 }
     }
-  } */
+  }
 });
 
 

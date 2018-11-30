@@ -160,11 +160,11 @@ export const audioHandler = {
 			} else {
 				this.song = true;
 				this.currentSongIndex = index
-				this.$refs.audio.load()
+				/* this.$refs.audio.load() */
 				setTimeout(() => {
 					this.song = false
 					this.$refs.audio.play();
-				}, 1000)
+				}, 30)
 				this.flag = true;
 
 			}
@@ -237,11 +237,11 @@ export const audioHandlerProgress = {
 			} else {
 				this.song = true;
 				this.currentSongIndex = index
-				this.$refs.audio.load()
+				/* this.$refs.audio.load() */
 				setTimeout(() => {
 					this.song = false
 					this.$refs.audio.play();
-				}, 1000)
+				}, 30)
 				this.flag = true;
 
 			}

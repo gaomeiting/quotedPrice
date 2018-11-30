@@ -10,8 +10,8 @@
 				<p>{{type}}-{{level}}类</p>
 			</div>
 		</div>
-		<div v-if="!hideAudio" class="icon" @click.stop="settingCurrentSong(index)" :class="song && index === currentSongIndex && flag ? 'icon_loading' : ''" >
-			<i class="iconfont"  v-if="(index != currentSongIndex) || (index === currentSongIndex && !song) " :class="index === currentSongIndex && flag ? 'icon-pause' : 'icon-bofang'"></i>
+		<div v-if="!hideAudio" class="icon" @click.stop="settingCurrentSong(index)" :class="index === currentSongIndex && !currentTime ? 'icon_loading' : ''" >
+			<i class="iconfont"  v-if="(index != currentSongIndex) || (index === currentSongIndex && !song && currentTime) " :class="index === currentSongIndex && flag ? 'icon-pause' : 'icon-bofang'"></i>
 		</div>
 	</li>
 	<audio :src="list[currentSongIndex] && list[currentSongIndex].url" ref="audio" @timeupdate="updateTime" @play="ready" @ended="end"></audio>

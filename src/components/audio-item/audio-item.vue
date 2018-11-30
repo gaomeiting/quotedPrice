@@ -4,8 +4,8 @@
 		<div class="content">
 			<div class="cover" :style="'background-image: url('+item.cover+')'">
 				<div class="mask">
-					<div class="icon" @click.stop="settingCurrentSong(index)" :class="song && index === currentSongIndex && flag ? 'icon_loading' : ''" >
-						<i class="iconfont"  v-if="(index != currentSongIndex) || (index === currentSongIndex && !song) " :class="index === currentSongIndex && flag ? 'icon-pause' : 'icon-bofang'"></i>
+					<div class="icon" @click.stop="settingCurrentSong(index)" :class="index === currentSongIndex && !currentTime ? 'icon_loading' : ''" >
+						<i class="iconfont"v-if="(index != currentSongIndex) || (index === currentSongIndex && !song && currentTime) " :class="index === currentSongIndex && flag ? 'icon-pause' : 'icon-bofang'"></i>
 					</div>
 				</div>
 			</div>
