@@ -33,10 +33,10 @@ export default {
 		}
 	},
 	created () {
-		/* if(!this.category.name) {
-			this.$router.back();
-			return;
-		} */
+		let routeCurrentCategoryIndex = this.$route.query.currentCategoryIndex * 1;
+		if(routeCurrentCategoryIndex) {
+			this.currentCategoryIndex = routeCurrentCategoryIndex;
+		}
 		let name =  this.$route.params.type;
 		this.savedCategory(name)
 		let category = this.category.category;

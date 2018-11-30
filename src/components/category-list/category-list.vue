@@ -1,6 +1,6 @@
 <template>
 <div>
-	<div class="category" v-for="(level, index) in item.category" :key="index">
+	<div class="category" v-for="(level, index) in item.category" :key="index" @click.stop="goDetailLevel(item, index)">
 		<category :level="level" :name="item.name" :type="item.type" :hideAudio="hideAudio"></category>
 	</div>
 </div>
@@ -21,7 +21,11 @@ export default {
 			default: false
 		}
 	},
-	
+	methods: {
+		goDetailLevel(item, index) {
+			this.$emit('goDetailLevel', item, index)
+		}
+	},
 	components: {
 		Category
 	}

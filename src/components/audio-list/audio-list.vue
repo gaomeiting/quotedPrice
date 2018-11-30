@@ -7,7 +7,7 @@
 			</figure>
 			<div class="text">
 				<h3>{{item.info}}</h3>
-				<p>{{type}}-{{level}}类</p>
+				<p>{{type}}-{{level}}</p>
 			</div>
 		</div>
 		<div v-if="!hideAudio" class="icon" @click.stop="settingCurrentSong(index)" :class="index === currentSongIndex && !currentTime ? 'icon_loading' : ''" >

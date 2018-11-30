@@ -3,20 +3,18 @@
   <div class="category">
 	  <div class="info">
 		  <div class="icon" :style="'background-image: url(/common/images/'+level.type+'_bg.png)'">
-			  <p>
-				  {{level.type}}类<br>
-				  {{name}}
+			  <p v-html="level.name">
 			  </p>
 		  </div>
 		  <div class="text">
-			  <h3>{{level.type}}类{{name}}</h3>
+			  <h3>{{level.nameText}}</h3>
 			  <p v-html="level.summary"></p>
 			 <p class="price-wrap"> <small>￥</small>  <strong>{{level.price}}</strong> <small>{{level.unit}}</small> <small class="inlineBlock" v-if="!level.originalUnit">￥{{level.originalPrice}}</small></p>
 			<p class="price-wrap" v-if="level.originalUnit"> <small>￥</small>  <strong>{{level.originalPrice}}</strong><small>{{level.originalUnit}}</small></p>
 		  </div>
 	  </div>
   </div>
-  <audio-list :list="level.audioList" @goAudioDetails="goAudioDetails" :type="name" :level="level.type" :hideAudio="hideAudio"></audio-list>
+  <audio-list :list="level.audioList" @goAudioDetails="goAudioDetails" :type="name" :level="level.nameText" :hideAudio="hideAudio"></audio-list>
 </div>
 </template>
 
@@ -46,6 +44,7 @@ export default {
 	},
 	methods: {
 		goAudioDetails(index) {
+			{{this.level}}
 			let currentAudio = {...this.level.audioList[index], name: this.type, type: this.level.type}
 			this.setCurrentAudio(currentAudio);
 			let path= `/index/${currentAudio.name}/${currentAudio.type}/${currentAudio.id}`;

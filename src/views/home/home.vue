@@ -7,7 +7,7 @@
 	</div>
 	<panel v-for="(item, index) in list" :key="index" :title="item.name" :item="item" @goDetail="goDetail">
 		<div class="category-wrap">
-			<category-list :item="item" :hideAudio="true"></category-list>
+			<category-list :item="item" :hideAudio="true" @goDetailLevel="goDetailLevel"></category-list>
 		</div>
 	</panel>
 </div>
@@ -28,6 +28,10 @@ export default {
 		goDetail(item) {
 			this.setCategory(item)
 			this.$router.push(`/index/${item.type}`)
+		},
+		goDetailLevel(item, index) {
+			this.$router.push(`/index/${item.type}?currentCategoryIndex=${index}`)
+			console.log(item, index)
 		},
 		...mapMutations({
 			'setCategory': 'SET_CATEGORY'

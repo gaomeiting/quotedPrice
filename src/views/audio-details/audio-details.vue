@@ -1,7 +1,7 @@
 <template>
 <div class="current" v-if="list.length>0">
 	<div class="audio-wrap">
-		<audio-item :list="list" :type="category.name" :level="currentAudio.type"></audio-item>
+		<audio-item :list="list" :type="category.name" :level="levelText"></audio-item>
 	</div>
 	<h3 class="title">报价详细说明</h3>
 	<p class="content" v-html="details"></p>
@@ -21,11 +21,13 @@ export default {
 		return {
 			details: '',
 			list: [],
-			data
+			data,
+			levelText: ''
 		}
 	},
 	created () {
 		let name = this.currentAudio.name || this.$route.params.type;
+		console.log(this.$route.params.level)
 		let currentAudioType = this.currentAudio.type || this.$route.params.level
 		let audioIndex = this.$route.params.audioId;
 		let levelType = this.$route.params.level;
@@ -34,6 +36,7 @@ export default {
 			return currentAudioType === item.type
 		})
 		this.details = level.details;
+		this.levelText = level.nameText;
 		if(this.currentAudio.name) {
 			this.list.push(this.currentAudio)
 		}
