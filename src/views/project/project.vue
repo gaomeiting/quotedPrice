@@ -41,7 +41,7 @@ export default {
 		this.savedCategory(name)
 		let category = this.category.category;
 		for( let i= 0; i<category.length; i++) {
-			let name = `${category[i]['type']}类`
+			let name = `${category[i]['nameText']}`
 			this.switches[i]= { name }
 		}
 	},

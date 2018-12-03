@@ -39,8 +39,8 @@ export default {
 	background-color: $color-background;
 	.switch-item {
 		display: inline-block;
-		width: 76px;
-		padding: 8px;
+		/* width: 76px; */
+		padding: 8px 12px;
 		text-align: center;
 		font-size: $font-size-medium;
 		color: $color-text-d;
