@@ -2,6 +2,8 @@
 叮当配网站报价的前端页面。
 提供报价,联系,样音收听等功能;
 http://baojia.syb.hvkid.mobi/
+
+![Image text](https://github.com/gaomeiting/quotedPrice/blob/dev/public/common/images/total.jpg)
 ```
 npm install
 ```
