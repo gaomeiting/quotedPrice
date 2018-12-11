@@ -8,7 +8,11 @@ http://baojia.syb.hvkid.mobi/
 npm install
 ```
 
-### Compiles and hot-reloads for development
+1. 音频预加载, 列表播放，拖拽进度
+2. 分类组件抽象
+3. 模拟数据抽象
+4. 联系电话调用
+5. 懒加载
 ```
 npm run serve
 ```
